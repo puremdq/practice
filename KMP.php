@@ -89,7 +89,4 @@ function KMP($str, $patten)
 
 $str = '1world1 hello world';
 $patten = 'world1';
-var_dump(KMP($str, $patten));
-
-
-
+//var_dump(KMP($str, $patten));
