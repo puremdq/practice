@@ -211,23 +211,23 @@ private:
 };
 
 
-double caculate(double czs1,char czf,double czs2){
+double caculate(double Operand1,char Operator,double Operand2){
 
-	switch (czf)
+	switch (Operator)
 	{
 
 	case '+':
 
-		return czs1+czs2;
+		return Operand1+Operand2;
 		break;
 	case '-':
-		return czs1-czs2;
+		return Operand1-Operand2;
 		break;
 	case '*':
-		return czs1*czs2;
+		return Operand1*Operand2;
 		break;
 	case '/':
-		return czs1/czs2;
+		return Operand1/Operand2;
 		break;
 
 	}
@@ -235,7 +235,7 @@ double caculate(double czs1,char czf,double czs2){
 }
 
 //是否为操作数
-bool isCzs(char *str){
+bool isOperand(char *str){
 
 
 	double temp=atof(str);
@@ -252,15 +252,15 @@ bool isCzs(char *str){
 
 
 //是否为操作符号
-bool isCzf(char ch){
+bool isOperator(char ch){
 
 
-	char czfArr[]="+-*/()#";
+	char OperatorArr[]="+-*/()#";
 	bool flag=false;
 
-	for (int i = 0; i<strlen(czfArr); i++)
+	for (int i = 0; i<strlen(OperatorArr); i++)
 	{
-		if(czfArr[i]==ch){
+		if(OperatorArr[i]==ch){
 			flag=true;
 			break;
 		}
@@ -271,46 +271,46 @@ bool isCzf(char ch){
 }
 
 //得到操作符的优先级值
-int getCzfValue(char czf){
+int getOperatorValue(char Operator){
 
 
-	if(czf=='#'){
-		czf=0;
-
-	}
-	else if(czf=='+'||czf=='-'){
-		czf=1;
+	if(Operator=='#'){
+		Operator=0;
 
 	}
-
-	else if(czf=='*'||czf=='/'){
-		czf=2;
+	else if(Operator=='+'||Operator=='-'){
+		Operator=1;
 
 	}
 
-	else if(czf=='('||czf==')'){
-		czf=3;
+	else if(Operator=='*'||Operator=='/'){
+		Operator=2;
+
+	}
+
+	else if(Operator=='('||Operator==')'){
+		Operator=3;
 
 	}else{
 
 		return -1;
 
 	}
-	return czf;
+	return Operator;
 }
 
 //比较操作符的优先级  -2表示非法
-int compareCzf(char tempCzf1,char tempCzf2){
+int compareOperator(char tempOperator1,char tempOperator2){
 
-	int czf1=getCzfValue(tempCzf1);
-	int czf2=getCzfValue(tempCzf2);
+	int Operator1=getOperatorValue(tempOperator1);
+	int Operator2=getOperatorValue(tempOperator2);
 
-	if(czf2!=-1&&czf2!=-1){
-		int res=czf1-czf2;
+	if(Operator2!=-1&&Operator2!=-1){
+		int res=Operator1-Operator2;
 
 		if(res==0){
 
-			if(czf1!=0){
+			if(Operator1!=0){
 
 				return 1;
 			}else{
@@ -333,22 +333,19 @@ int compareCzf(char tempCzf1,char tempCzf2){
 	}
 }
 
-void getValue(char (*bds)[10],int leng){
+double getValue(char (*bds)[10],int leng){
 
 	bds[leng][0]='#';
 	bds[leng][1]='\0';
 	leng=leng+1;
 
-	charStack czfStack(20);//操作符
-	doubleStack czsStack(20);//操作数
+	charStack OperatorStack(20);//操作符
+	doubleStack OperandStack(20);//操作数
 
-	czfStack.push('#');
+	OperatorStack.push('#');
 
 
 	char *temp;//存放当前
-
-
-
 
 	//printf("%s   %d\n",temp,i);
 
@@ -356,36 +353,35 @@ void getValue(char (*bds)[10],int leng){
 	{
 		temp=bds[i];
 
-		if(isCzs(temp)){
+		if(isOperand(temp)){
 
-			czsStack.push(atof(temp));
+			OperandStack.push(atof(temp));
 
-		}else if(isCzf(temp[0])){
+		}else if(isOperator(temp[0])){
 
 			if(temp[0]=='('){
 
-				czfStack.push('(');
-
+				OperatorStack.push('(');
 
 			}else if(temp[0]==')'){
 
 
-				char tempCzf=czfStack.pop();
+				char tempOperator=OperatorStack.pop();
 
-				if(tempCzf!='('){
+				if(tempOperator!='('){
 					//jisuan
 
 
-					double czs2=czsStack.pop();
-					double czs1=czsStack.pop();
+					double Operand2=OperandStack.pop();
+					double Operand1=OperandStack.pop();
 
 
-					double res=caculate(czs1,tempCzf,czs2);
-					czsStack.push(res);
+					double res=caculate(Operand1,tempOperator,Operand2);
+					OperandStack.push(res);
 
-					if(czfStack.pop()!='('){
+					if(OperatorStack.pop()!='('){
 
-					
+
 						printf("error");
 
 					}
@@ -394,60 +390,60 @@ void getValue(char (*bds)[10],int leng){
 				}
 
 
-			}else if(compareCzf(temp[0],czfStack.getstackTop())>0){
+			}else if(compareOperator(temp[0],OperatorStack.getstackTop())>0){
 
 
-				printf("%c da  %c\n",temp[0],czfStack.getstackTop());
-				if(czfStack.getstackTop()!='#'){
-				
-				
+				//printf("%c da  %c\n",temp[0],OperatorStack.getstackTop());
+				if(OperatorStack.getstackTop()!='#'){
+
+
 					if(bds[i+1][0]!='('){
-					//jisuan
+						//jisuan
 
-					double czs1=czsStack.pop();
-					double czs2=atof(bds[++i]);
+						double Operand1=OperandStack.pop();
+						double Operand2=atof(bds[++i]);
 
 
-					double res=caculate(czs1,temp[0],czs2);
-					czsStack.push(res);
+						double res=caculate(Operand1,temp[0],Operand2);
+						OperandStack.push(res);
 
-				
+
 					}else{
-				
 
-					printf("pus %c\n",temp[0]);
-					czfStack.push(temp[0]);
-				
+
+						//printf("pus %c\n",temp[0]);
+						OperatorStack.push(temp[0]);
+
 					}
 
 				}else{
-				
-				printf("pus %c\n",temp[0]);
-					czfStack.push(temp[0]);
-				
+
+					//printf("pus %c\n",temp[0]);
+					OperatorStack.push(temp[0]);
+
 				}
 			}
-			else if(compareCzf(temp[0],czfStack.getstackTop())<=0){
+			else if(compareOperator(temp[0],OperatorStack.getstackTop())<=0){
 
-				char tempCzf=czfStack.getstackTop();
+				char tempOperator=OperatorStack.getstackTop();
 
-				printf("%c xiao  %c\n",temp[0],czfStack.getstackTop());
+				//printf("%c xiao  %c\n",temp[0],OperatorStack.getstackTop());
 
-				if(tempCzf!='#'){
+				if(tempOperator!='#'){
 
-					if(tempCzf!='('&&tempCzf!=')'){
-						
-						czfStack.pop();
+					if(tempOperator!='('&&tempOperator!=')'){
 
-						double czs2=czsStack.pop();
-						double czs1=czsStack.pop();
+						OperatorStack.pop();
 
-						double res=caculate(czs1,tempCzf,czs2);
-						czsStack.push(res);
-						czfStack.push(temp[0]);
+						double Operand2=OperandStack.pop();
+						double Operand1=OperandStack.pop();
+
+						double res=caculate(Operand1,tempOperator,Operand2);
+						OperandStack.push(res);
+						OperatorStack.push(temp[0]);
 
 					}else{
-						czfStack.push(temp[0]);
+						OperatorStack.push(temp[0]);
 
 					}
 
@@ -457,17 +453,17 @@ void getValue(char (*bds)[10],int leng){
 
 			//end 操作符
 		}
-		
-		
-		
+
+
+
 		else{
 			printf("%s error burenshi\n",temp);
 		}
 
-	
 
-}
-	printf("%lf",czsStack.pop());
+
+	}
+	return OperandStack.pop();
 
 }
 
@@ -483,7 +479,7 @@ int fenge(char *str,char (*arr)[10]){
 	for (int i = 0; i < strlen(str); i++)
 	{
 
-		if(isCzf(str[i])){
+		if(isOperator(str[i])){
 
 			if(flag==0){
 				arr[j][0]=str[i];
@@ -521,11 +517,9 @@ int main(){
 
 	char str[]="15+(8/2)+100*2";
 	char  bds[MAX][10]={'\0'};
-	int leng=fenge(str,bds);
-	getValue(bds,leng);
+	int leng=fenge(str,bds);//分割
+	double res=getValue(bds,leng);
+
+	printf("%lf\n",res);
 	getchar();
-
-
 }
-
-
