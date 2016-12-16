@@ -13,7 +13,7 @@ int canUseScreen=1;
 int main(){
 
 
-	struct sockaddr_in addrServ;//ip ½á¹¹Ìå
+	struct sockaddr_in addrServ;//ip ç»“æ„ä½“
 
 	char sendBuf[100]={0};
 	char buf[100]={0};
@@ -40,7 +40,7 @@ int main(){
 	//end windows need
 
 
-	sockfd=socket(AF_INET,SOCK_STREAM,0);//³õÊ¼»¯Ò»¸ösocket
+	sockfd=socket(AF_INET,SOCK_STREAM,0);//åˆå§‹åŒ–ä¸€ä¸ªsocket
 
 
 	if(sockfd<0){
@@ -58,7 +58,7 @@ int main(){
 	addrServ.sin_port=htons(SERVERPORT);
 	addrServ.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");
 
-	retVal=connect(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//½¨Á¢Á¬½Ó
+	retVal=connect(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//å»ºç«‹è¿æ¥
 
 
 	if(retVal<0){
@@ -70,7 +70,7 @@ int main(){
 	}
 
 	
-	h1=::CreateThread(NULL,0,receiveMessage,&sockfd,0,NULL);//½¨Á¢×ÓÏß³Ì //::CloseHandle(h1);
+	h1=::CreateThread(NULL,0,receiveMessage,&sockfd,0,NULL);//å»ºç«‹å­çº¿ç¨‹ //::CloseHandle(h1);
 
 	while (true)
 	{
@@ -110,9 +110,9 @@ int main(){
 
 }
 
-//h1=::CreateThread(NULL,0,sendMessage,&cilentSocId,0,NULL);//½¨Á¢×ÓÏß³Ì
+//h1=::CreateThread(NULL,0,sendMessage,&cilentSocId,0,NULL);//å»ºç«‹å­çº¿ç¨‹
 
-//×ÓÏß³Ì ½ÓÊÜĞÅÏ¢;
+//å­çº¿ç¨‹ æ¥å—ä¿¡æ¯;
 DWORD WINAPI receiveMessage(LPVOID serverId){
 
 	char pacLength[5]={0};
@@ -131,7 +131,7 @@ DWORD WINAPI receiveMessage(LPVOID serverId){
 
 		if(retVal<0){
 
-			printf("¿Í»§¶Ë²»ÄÜÕı³£½ÓÊÕ\n");
+			printf("å®¢æˆ·ç«¯ä¸èƒ½æ­£å¸¸æ¥æ”¶\n");
 
 		}else{
 

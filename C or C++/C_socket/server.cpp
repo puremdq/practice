@@ -12,7 +12,7 @@ int canUseScreen=1;
 
 int main(){
 
-	struct sockaddr_in addrServ;//ip ½á¹¹Ìå
+	struct sockaddr_in addrServ;//ip ç»“æ„ä½“
 
 	int addrClilentLen=0;
 
@@ -43,7 +43,7 @@ int main(){
 
 
 
-	sockfd=socket(AF_INET,SOCK_STREAM,0);//³õÊ¼»¯Ò»¸ösocket
+	sockfd=socket(AF_INET,SOCK_STREAM,0);//åˆå§‹åŒ–ä¸€ä¸ªsocket
 
 
 	if(sockfd<0){
@@ -61,8 +61,8 @@ int main(){
 	addrServ.sin_port=htons(SERVERPORT);
 	addrServ.sin_addr.S_un.S_addr=htonl(INADDR_ANY);
 
-	//retVal=connect(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//½¨Á¢Á¬½Ó
-	retVal=bind(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//°ó¶¨µØÖ·
+	//retVal=connect(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//å»ºç«‹è¿æ¥
+	retVal=bind(sockfd,(struct sockaddr*)&addrServ,sizeof(addrServ));//ç»‘å®šåœ°å€
 
 
 	if(retVal<0){
@@ -100,7 +100,7 @@ int main(){
 
 
 	
-	h1=::CreateThread(NULL,0,sendMessage,&cilentSocId,0,NULL);//½¨Á¢×ÓÏß³Ì
+	h1=::CreateThread(NULL,0,sendMessage,&cilentSocId,0,NULL);//å»ºç«‹å­çº¿ç¨‹
 
 	//::CloseHandle(h1);
 
@@ -123,7 +123,7 @@ int main(){
 
 }
 
-//×ÓÏß³Ì ·¢ËÍĞÅÏ¢;
+//å­çº¿ç¨‹ å‘é€ä¿¡æ¯;
 DWORD WINAPI sendMessage(LPVOID cilentId){
 
 	char sendBuf[100]={0};

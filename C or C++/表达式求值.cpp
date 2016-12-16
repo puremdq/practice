@@ -22,7 +22,7 @@ public:
 
 	}
 
-	//µÃµ½Õ»¶¥  ²»³öÕ»
+	//å¾—åˆ°æ ˆé¡¶  ä¸å‡ºæ ˆ
 	double getstackTop(){
 
 		if(!this->isEmptyStack()){
@@ -39,7 +39,7 @@ public:
 
 
 
-	//³öÕ»
+	//å‡ºæ ˆ
 	double pop(){
 
 		if(!this->isEmptyStack()){
@@ -54,7 +54,7 @@ public:
 
 	}
 
-	//ÈëÕ»
+	//å…¥æ ˆ
 	bool push(double ch){
 
 		if(!this->isFullStack()){
@@ -126,7 +126,7 @@ public:
 
 	}
 
-	//µÃµ½Õ»¶¥  ²»³öÕ»
+	//å¾—åˆ°æ ˆé¡¶  ä¸å‡ºæ ˆ
 	char getstackTop(){
 
 		if(!this->isEmptyStack()){
@@ -143,7 +143,7 @@ public:
 
 
 
-	//³öÕ»
+	//å‡ºæ ˆ
 	char pop(){
 
 		if(!this->isEmptyStack()){
@@ -158,7 +158,7 @@ public:
 
 	}
 
-	//ÈëÕ»
+	//å…¥æ ˆ
 	bool push(char ch){
 
 		if(!this->isFullStack()){
@@ -234,7 +234,7 @@ double caculate(double Operand1,char Operator,double Operand2){
 
 }
 
-//ÊÇ·ñÎª²Ù×÷Êı
+//æ˜¯å¦ä¸ºæ“ä½œæ•°
 bool isOperand(char *str){
 
 
@@ -251,7 +251,7 @@ bool isOperand(char *str){
 }
 
 
-//ÊÇ·ñÎª²Ù×÷·ûºÅ
+//æ˜¯å¦ä¸ºæ“ä½œç¬¦å·
 bool isOperator(char ch){
 
 
@@ -270,7 +270,7 @@ bool isOperator(char ch){
 
 }
 
-//µÃµ½²Ù×÷·ûµÄÓÅÏÈ¼¶Öµ
+//å¾—åˆ°æ“ä½œç¬¦çš„ä¼˜å…ˆçº§å€¼
 int getOperatorValue(char Operator){
 
 
@@ -299,7 +299,7 @@ int getOperatorValue(char Operator){
 	return Operator;
 }
 
-//±È½Ï²Ù×÷·ûµÄÓÅÏÈ¼¶  -2±íÊ¾·Ç·¨
+//æ¯”è¾ƒæ“ä½œç¬¦çš„ä¼˜å…ˆçº§  -2è¡¨ç¤ºéæ³•
 int compareOperator(char tempOperator1,char tempOperator2){
 
 	int Operator1=getOperatorValue(tempOperator1);
@@ -339,13 +339,13 @@ double getValue(char (*bds)[10],int leng){
 	bds[leng][1]='\0';
 	leng=leng+1;
 
-	charStack OperatorStack(20);//²Ù×÷·û
-	doubleStack OperandStack(20);//²Ù×÷Êı
+	charStack OperatorStack(20);//æ“ä½œç¬¦
+	doubleStack OperandStack(20);//æ“ä½œæ•°
 
 	OperatorStack.push('#');
 
 
-	char *temp;//´æ·Åµ±Ç°
+	char *temp;//å­˜æ”¾å½“å‰
 
 	//printf("%s   %d\n",temp,i);
 
@@ -451,7 +451,7 @@ double getValue(char (*bds)[10],int leng){
 
 			}
 
-			//end ²Ù×÷·û
+			//end æ“ä½œç¬¦
 		}
 
 
@@ -517,7 +517,7 @@ int main(){
 
 	char str[]="15+(8/2)+100*2";
 	char  bds[MAX][10]={'\0'};
-	int leng=fenge(str,bds);//·Ö¸î
+	int leng=fenge(str,bds);//åˆ†å‰²
 	double res=getValue(bds,leng);
 
 	printf("%lf\n",res);
