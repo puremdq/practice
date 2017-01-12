@@ -6,6 +6,7 @@
 */
 
 #include<stdio.h>
+int partition(int* arr,int low,int high);
 void printArr(int *insertSortArr,int len);
 void quickSort(int *arr);
 
@@ -23,35 +24,32 @@ void quickSort(int *arr);
 */
 int partition(int* arr,int low,int high){
 
+
+	int pivot=arr[low];     //记下枢轴 的 值
 	int pivotIndex=low;		//记下枢轴所在的位置值
-	int temp=0;
 
 	while(low<high){
 		
-		while(arr[high]>=arr[pivotIndex]&&high>pivotIndex){
+		while(arr[high]>=pivot&&low<high){
 
 			high--;
 		
 		}
 		
-			temp=arr[pivotIndex];
 			arr[pivotIndex]=arr[high];
-			arr[high]=temp;
+			arr[high]=pivot;
 			pivotIndex=high;
 	
 	
-		while(arr[low]<=arr[pivotIndex]&&low<pivotIndex){
+		while(arr[low]<=pivot&&low<high){
 		
 				low++;
 		
 		}
-	
-			temp=arr[pivotIndex];
 			arr[pivotIndex]=arr[low];
-			arr[low]=temp;
+			arr[low]=pivot;
 			pivotIndex=low;
 		
-
 	}
 
 	return pivotIndex;
@@ -81,16 +79,14 @@ void quickSort(int* arr,int low,int high){
 }
 
 
-
 int main(){
 
-	int arr[]={2,5,3,1,8,4,6};
-	quickSort(arr,0,6);
-	printArr(arr,7);
-	//getchar();
+	int arr[]={2,5,3,1,8,4,6,0};
+	quickSort(arr,0,7);
+	printArr(arr,8);
+	getchar();
 
 }
-
 
 /**
 *打印数组
