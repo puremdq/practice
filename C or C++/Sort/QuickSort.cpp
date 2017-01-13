@@ -10,9 +10,6 @@ int partition(int* arr,int low,int high);
 void printArr(int *insertSortArr,int len);
 void quickSort(int *arr);
 
-
-
-
 /**
 *将数组 从给定起点和给定终点 置为一个一第一个元素为枢轴的数组
 *使得枢轴左边的元素都小于它，右边的元素都大于它
@@ -84,21 +81,21 @@ int main(){
 	int arr[]={2,5,3,1,8,4,6,0};
 	quickSort(arr,0,7);
 	printArr(arr,8);
-	getchar();
+	//getchar();
+	return 0;
 
 }
 
 /**
 *打印数组
-*@param insertSortArr 要进行插入排序的数组的指针
+*@param int* arr 要打印的数组的指针
+*@param int  len 数组的长度
 */
-void printArr(int *insertSortArr,int len){
+void printArr(int *arr,int len){
 
 	for(int i=0;i<len;i++){
 
-
-		printf("%5d",insertSortArr[i]);
-
+		printf("%5d",arr[i]);
 
 	}
 
