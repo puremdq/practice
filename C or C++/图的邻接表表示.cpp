@@ -8,7 +8,7 @@ struct ArcNode{
 	ArcNode * nextArc;
 };
 
-//头节点（便是图的某个点）
+//头节点（表示图的某个点）
 struct VNode{
 	
 	char data;//数据

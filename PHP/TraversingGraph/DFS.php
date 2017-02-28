@@ -7,7 +7,7 @@ require_once "Map.class.php";
 
 
 /**
- * 广度优先遍历(搜索)
+ * 深度优先遍历(搜索)
  * @param Map $map 要遍历的图
  * @param string $start 从此节点开始进行深度遍历
  * @param array $isUse 是否已经被遍历过
